@@ -23,7 +23,7 @@ Blue runs work through named AI agent personas, each with its own skill file:
 | **Blue-OS** | Claude Code dashboard/control panel, runs on Blue's Mac, phone-reachable PWA | localhost:4173 (Blue's Mac) | Stable/idle — booking subsystem just split out to its own repo |
 | **aethnous-landing** | Public ÆTHNOUS marketing/landing site, Next.js (customized build) + Three.js solar-system hero | (Vercel, ÆTHNOUS domain) | Active — building EN-market acquisition funnel (`/start`, `/quiz`) |
 | **stardust** | 星塵夢汐 Stardust DreamTide — separate wellness/journaling PWA (mood tracking, AI companion, crystal encyclopedia) | stardust.bluechiou.com | Active, brand-new — v1 just shipped, v1.5+ roadmapped |
-| **Blue-Bubble-Buddy** (this repo) | Portable Claude Code skill library (16 skills) teaching engineering discipline to other AI agents/smaller models | (skill library, no deployment) | Active — see §4, STATE.md discrepancy needs resolving |
+| **Blue-Bubble-Buddy** (this repo) | Portable Claude Code skill library (17 skills) teaching engineering discipline to other AI agents/smaller models | (skill library, no deployment) | Active — see §4; STATE.md current as of 2026-07-27 |
 
 Unlike the other six repos, this one isn't an ÆTHNOUS product — it's a general-purpose engineering-discipline skill library Blue built, usable in any project (including the other six).
 
@@ -40,14 +40,15 @@ Unlike the other six repos, this one isn't an ÆTHNOUS product — it's a genera
 ## 4. This repo: Blue-Bubble-Buddy
 
 ### Purpose
-A portable Claude Code skill library — the product *is* the `.claude/skills/` tree (16 skills), teaching junior/mid-level engineers and smaller (Sonnet-class) models to carry a project forward with principal-engineer discipline across four pillars: Primitives (communicate/act/verify/stop), Orchestration (goal→action→check→repeat, delegation), Memory (state, handoffs, failure chronicles), and Self-Improvement (rule distillation, skill authoring, change control, research method). No `package.json` — pure Markdown/skill library, not an npm package.
+A portable Claude Code skill library — the product *is* the `.claude/skills/` tree (17 BBB-authored skills, plus one vendored third-party skill so the directory count is 18), teaching junior/mid-level engineers and smaller (Sonnet-class) models to carry a project forward with principal-engineer discipline across four pillars: Primitives (communicate/act/verify/stop), Orchestration (goal→action→check→repeat, delegation), Memory (state, handoffs, failure chronicles), and Self-Improvement (rule distillation, skill authoring, change control, research method). No `package.json` — pure Markdown/skill library, not an npm package.
 
-### Current status: active — but STATE.md on `main` is stale, resolve this first
-This is the most important open item in this repo right now:
+### Current status: active — one unmerged branch still needs a decision
+`STATE.md` on `main` is current (2026-07-27). The open item below is not a
+staleness problem any more; it is a branch that was never merged:
 
-- **`main`'s `STATE.md`** (dated "verified 2026-07-07") says the FACTUAL review pass across all 16 skills is **incomplete**, and flags it as the explicit next action for "OWNER of next session."
+- **`main`'s `STATE.md`** (now dated "verified 2026-07-27") still lists the FACTUAL review pass over the original 16 skills as open, because the work that closed it has never landed here.
 - **An unmerged branch, `claude/file-reading-setup-dtg41w`** (single commit `c88323e`, dated 2026-07-17 — ten days newer), contains an updated `STATE.md` claiming that debt is **paid**: every command in all 16 skills was re-executed, and one real Class 2 defect was found and fixed (`bbb-rule-distillation`'s audit regex widened from bullet-only `^- ` to `^(- |[0-9]+\. )` so it also catches numbered-list rules in CLAUDE.md files). That branch's `STATE.md` also names the next roadmap item: **agent-skill ↔ BBB integration** (e.g., per-agent skills referencing `b5-mode`).
-- **This work has never been merged to `main`.** Anyone reading `main`'s `STATE.md` today gets a false picture — it looks like open review debt still exists, when a later session already closed it out on an orphaned branch.
+- **This work has never been merged to `main`.** As of 2026-07-27 `main`'s `STATE.md` open-items table names the branch explicitly and says not to redo the pass blindly, so the picture is no longer misleading — but the branch is still unmerged and the fix it carries is still not in `main`.
 
 **Recommended next action for whoever picks this up:** review and merge `claude/file-reading-setup-dtg41w` into `main` (or cherry-pick its `STATE.md` + the `bbb-rule-distillation` fix), so the canonical `STATE.md` reflects reality before anyone wastes time re-doing the already-finished factual review pass.
 
@@ -57,7 +58,7 @@ This is the most important open item in this repo right now:
 - Next planned feature-level work (per the unmerged branch): tighter integration between BBB skills and other per-agent skill sets.
 
 ### Skill inventory
-16 skills under `.claude/skills/`: `b5-mode`, `bbb-campaign-planning`, `bbb-change-control`, `bbb-debugging-playbook`, `bbb-eval-loop`, `bbb-failure-archaeology`, `bbb-install-and-use`, `bbb-project-discovery`, `bbb-research-frontier`, `bbb-research-methodology`, `bbb-rule-distillation`, `bbb-skill-authoring`, `bbb-state-and-memory`, `bbb-subagent-orchestration`, `bbb-verification-and-evidence`, `bbb-visual-self-check`. Most recently touched (library-wide readability pass, latest merged commit): 9 of the 16, for heading/section-order normalization only — no command-text changes.
+17 BBB skills under `.claude/skills/`: `b5-mode`, `bbb-campaign-planning`, `bbb-change-control`, `bbb-debugging-playbook`, `bbb-eval-loop`, `bbb-failure-archaeology`, `bbb-install-and-use`, `bbb-knowledge-graph`, `bbb-project-discovery`, `bbb-research-frontier`, `bbb-research-methodology`, `bbb-rule-distillation`, `bbb-skill-authoring`, `bbb-state-and-memory`, `bbb-subagent-orchestration`, `bbb-verification-and-evidence`, `bbb-visual-self-check`. A vendored third-party skill, `ui-ux-pro-max` (PR #8, 2026-07-27), also sits in the tree but is not authored to this library's format spec — so `ls` returns 18 while the library is 17. Most recently touched (library-wide readability pass, latest merged commit): 9 of the 16, for heading/section-order normalization only — no command-text changes.
 
 ### Branches
 `main` plus this session's branch are current and in sync. `claude/docs-ai-agent-readability-3p8jyz` and `claude/workflow-improvement-review-sxjfwd` are already merged. **`claude/file-reading-setup-dtg41w` is the one unmerged branch with real, stranded work** — see above.
