@@ -42,33 +42,57 @@ Format and rules: `.claude/skills/bbb-state-and-memory/SKILL.md`.
   one-liner that printed graph.json's top-level keys instead of the indexed
   file list. Caught by executing it before shipping (non-negotiable #1) and
   replaced with a verified per-file node ranking.
-- **Class 3 gate: three-reviewer workflow DISPATCHED, results not yet collected.**
-  FACTUAL / DOCTRINE / USABILITY subagents were launched in parallel against a
-  shared brief. **Unlike the 2026-07-07 run, independent reviewers WERE
-  available — no author-equals-reviewer deviation applies to this change.**
+- **Class 3 gate: COMPLETE.** FACTUAL / DOCTRINE / USABILITY reviewers ran
+  independently in parallel from a shared brief; all three returned
+  SHIP WITH FIXES (4 blocking findings total, 13 important, 15 minor). One
+  fixer (this session) applied every blocking and important finding; minors are
+  listed below as deferred. **Unlike the 2026-07-07 run, independent reviewers
+  WERE available — no author-equals-reviewer deviation applies to this change.**
+- **What review caught that self-review had not** (the reason the gate exists):
+  - *Blocking:* the skill published `graphify query "how is overselling
+    prevented?"` as returning 85 nodes. The author had actually run a different
+    string; the published one returns `No matching nodes found`. Two reviewers
+    found this independently. The corrected rule is better than the original
+    claim: **`query` seed-matches identifiers, not English prose.**
+  - *Blocking:* step 1 told the reader to confirm `Token cost: 0 input · 0
+    output` from the build output. That line never appears in the terminal — it
+    is in `GRAPH_REPORT.md`. A literal reader would have aborted good runs.
+  - *False claim:* "output goes to `src/graphify-out/`, not the current
+    directory" — a scoped build *also* writes a stub `graphify-out/manifest.json`
+    in the CWD, so the default path looks valid while holding no graph.
+  - *Oversell:* an unmeasured "hundreds of thousands of tokens" headline, and a
+    hub table whose "minified junk" column silently omitted that `worker.js`
+    still ranks #3 unscoped. Both corrected to verbatim, attributed output.
+  - *Scope risk:* `graphify install --project --strict` installs a hook that
+    blocks file reads until a query runs — it would convert the owner-mandated
+    optional accelerator into a hard gate. Now explicitly fenced off.
+  - *Confidentiality:* `extract`, `label`, and `cluster-only --backend` ship
+    code-derived content to an external LLM provider. Now a trust boundary.
+- **Determinism, measured this run:** two independent builds of identical input
+  gave identical nodes/edges (2915 / 5146) but different community counts
+  (174 vs 175). The skill now says to treat nodes and edges as reproducible and
+  clustering as advisory.
 - **Handoff:**
-  - **Next action:** read the three review files, then run the single-fixer pass
-    (blocking + important findings applied by ONE fixer, minor ones deferred):
-    `cat /tmp/claude-0/-home-user/69135081-54ab-5898-b0ec-7ea55c0ef2fe/scratchpad/review-{factual,doctrine,usability}.md`
-    If that scratchpad is gone (it is session-scoped and does not survive the
-    container), the reviews must be re-run — the skill has NOT yet passed its
-    Class 3 gate, and must not be merged to `main` until it has.
-  - **Then apply the staged companion edits**, deliberately held back so they
-    would not shift the ground under the running reviews:
-    README.md inventory row + "Sixteen" → "Seventeen"; a one-clause
-    cross-reference from `bbb-project-discovery` (one clause only — the graphify
-    runbook lives in exactly one home).
+  - **Next action:** none required for this change — it is complete and pushed.
+    PR #9 is a draft; converting it to ready-for-review is the owner's call.
+  - **Deferred minor findings** (fix opportunistically, Class 1–2): the `path`
+    relation list may still be incomplete beyond the four documented; build
+    timings in the skill are not independently reproduced; the vendor graphify
+    skill at `/root/.claude/skills/graphify/` competes for the same triggers in
+    any session where both are loaded (documented in the skill, not resolvable
+    from inside this repo).
   - **Blocking issue:** none.
   - **Files in flight:** none uncommitted — verify with `git status --porcelain=v1`.
   - **Re-verify state:** `ls .claude/skills/ | wc -l` (expect 17);
-    `graphify --version` (expect 0.9.27).
+    `graphify --version` (expect 0.9.27);
+    `grep -c bbb-knowledge-graph README.md` (expect 1).
 
 ## Open items / escalations
 
 | Item | Owner | Blocked on | Since |
 |---|---|---|---|
 | FACTUAL review pass over the original 16 skills — re-execute every published command, fix stale ones as Class 2 | next session | session time only | 2026-07-07 |
-| Collect the 3 dispatched reviews for `bbb-knowledge-graph` and run the fixer pass; skill is unmerged until then | next session | the review files (see Handoff) | 2026-07-27 |
+| PR #9 (`bbb-knowledge-graph`) is a draft awaiting the owner's decision to merge; Class 3 gate is satisfied | owner | owner review | 2026-07-27 |
 | `b5-mode` always-on trigger and `bbb-state-and-memory` "or should have" trigger: precision unmeasured | next session | frontier problem F4 | 2026-07-07 |
 | Five skills sit below the 120-line body target (95–119) — accepted; the floor is a target, not a gate. Do not pad. | — | — | 2026-07-07 |
 

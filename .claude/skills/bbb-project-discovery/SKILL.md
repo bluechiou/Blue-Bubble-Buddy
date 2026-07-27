@@ -71,7 +71,9 @@ A cluster of TODOs in one module marks a hot area; treat it as fragile.
 
 **5. Conventions.** Skim 2–3 recently-touched source files for naming, comment
 density, and idiom; note generated directories (don't hand-edit those) and any
-deploy/data conventions the docs or CI reveal.
+deploy/data conventions the docs or CI reveal. In a repo too large to tell which
+files those should be, `bbb-knowledge-graph` is an optional accelerator for
+picking them — it never replaces this sequence.
 
 ## The Project Brief
 

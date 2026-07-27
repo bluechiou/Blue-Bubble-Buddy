@@ -2,7 +2,7 @@
 
 A portable skill library that equips junior/mid-level engineers and smaller AI
 models (Sonnet-class) to carry any project forward with the discipline of a
-principal engineer. Sixteen skills teach four pillars: **Primitives** (how to
+principal engineer. Seventeen skills teach four pillars: **Primitives** (how to
 communicate, act, verify, stop), **Orchestration** (goal → action → check →
 repeat; delegation), **Memory** (state, handoffs, failure chronicles), and
 **Self-Improvement** (rule distillation, skill authoring, change control,
@@ -20,6 +20,7 @@ re-verification one-liners.
 |---|---|
 | `b5-mode` | The behavior contract: conclusion-first replies, immediate action, evidence-backed progress reports, minimum scope, disciplined turn endings. |
 | `bbb-project-discovery` | Investigate an unfamiliar repo like an incoming principal engineer before changing anything; Project Brief template; ask the human at most five questions. |
+| `bbb-knowledge-graph` | Build a call-graph of an unfamiliar repo with the third-party graphify CLI to find entry points and trace call paths; optional accelerator for one step of project discovery, with a mandatory fallback. |
 | `bbb-debugging-playbook` | Reproduce first, rank mechanisms, run discriminating experiments one change at a time; a fix must explain every observation including the negatives. |
 
 ### Orchestration — goals, checks, delegation
