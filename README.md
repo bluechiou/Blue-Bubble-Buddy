@@ -2,7 +2,7 @@
 
 A portable skill library that equips junior/mid-level engineers and smaller AI
 models (Sonnet-class) to carry any project forward with the discipline of a
-principal engineer. Seventeen skills teach four pillars: **Primitives** (how to
+principal engineer. Seventeen BBB skills teach four pillars: **Primitives** (how to
 communicate, act, verify, stop), **Orchestration** (goal → action → check →
 repeat; delegation), **Memory** (state, handoffs, failure chronicles), and
 **Self-Improvement** (rule distillation, skill authoring, change control,
@@ -51,6 +51,11 @@ re-verification one-liners.
 | `bbb-campaign-planning` | Decision-gated campaigns for multi-session problems: phases with pre-committed expected observations, branches, fenced wrong paths. |
 | `bbb-research-methodology` | Hypothesis-predicts-numbers-before-running, adversarial refutation, and the idea lifecycle ending in adoption or documented retirement. |
 | `bbb-research-frontier` | The open problems (eval harness, cross-model parity, automated distillation…) with first steps and falsifiable milestones — all labeled open/candidate. |
+
+### Also in the tree — vendored, not part of the library
+| Skill | One line |
+|---|---|
+| `ui-ux-pro-max` | Third-party design-intelligence skill vendored in from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (PR #8). Useful, but it is not authored to this library's format spec and is not covered by the four pillars — so `ls .claude/skills/` returns 18 while the library itself is 17. |
 
 ## Quick start
 
